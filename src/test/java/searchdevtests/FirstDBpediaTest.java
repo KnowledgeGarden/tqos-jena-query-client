@@ -20,6 +20,7 @@ public class FirstDBpediaTest extends SearchRoot {
 		
 		IResult r = engine.runQuery(queryStr, IConstants.DBPEDIA_SERVICE);
 		System.out.println("A "+r.getErrorString());
+		System.out.println("B "+r.getResultObject());
 		environment.shutDown();
 		System.exit(0);
 	}

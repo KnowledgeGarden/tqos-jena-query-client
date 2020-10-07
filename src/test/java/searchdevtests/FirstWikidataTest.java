@@ -35,6 +35,7 @@ public class FirstWikidataTest extends SearchRoot {
 		
 		IResult r = engine.runQuery(queryStr, IConstants.WIKIDATA_SERVICE);
 		System.out.println("A "+r.getErrorString());
+		System.out.println("B "+r.getResultObject());
 		environment.shutDown();
 		System.exit(0);
 	}
@@ -42,7 +43,6 @@ public class FirstWikidataTest extends SearchRoot {
 }
 
 /*
- SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 ------------------------------
 | lexemeId  | lemma          |
 ==============================
@@ -52,5 +52,32 @@ public class FirstWikidataTest extends SearchRoot {
 | wd:L3784  | "potato"@en    |
 ------------------------------
 A 
+
+AFTER adding toJSON
+A 
+B { "head": {
+    "vars": [ "lexemeId" , "lemma" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "lexemeId": { "type": "uri" , "value": "http://www.wikidata.org/entity/L18187" } ,
+        "lemma": { "type": "literal" , "xml:lang": "en" , "value": "potassium" }
+      } ,
+      { 
+        "lexemeId": { "type": "uri" , "value": "http://www.wikidata.org/entity/L41230" } ,
+        "lemma": { "type": "literal" , "xml:lang": "en" , "value": "potash" }
+      } ,
+      { 
+        "lexemeId": { "type": "uri" , "value": "http://www.wikidata.org/entity/L41229" } ,
+        "lemma": { "type": "literal" , "xml:lang": "en" , "value": "potable" }
+      } ,
+      { 
+        "lexemeId": { "type": "uri" , "value": "http://www.wikidata.org/entity/L3784" } ,
+        "lemma": { "type": "literal" , "xml:lang": "en" , "value": "potato" }
+      }
+    ]
+  }
+}
 
  */

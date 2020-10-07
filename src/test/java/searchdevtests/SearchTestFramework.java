@@ -20,8 +20,8 @@ public class SearchTestFramework {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//new FirstDBpediaTest();
-		new FirstWikidataTest();
+		new FirstDBpediaTest();
+		//new FirstWikidataTest();
 
 	}
 
