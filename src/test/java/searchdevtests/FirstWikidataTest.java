@@ -40,3 +40,17 @@ public class FirstWikidataTest extends SearchRoot {
 	}
 
 }
+
+/*
+ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+------------------------------
+| lexemeId  | lemma          |
+==============================
+| wd:L18187 | "potassium"@en |
+| wd:L41230 | "potash"@en    |
+| wd:L41229 | "potable"@en   |
+| wd:L3784  | "potato"@en    |
+------------------------------
+A 
+
+ */
