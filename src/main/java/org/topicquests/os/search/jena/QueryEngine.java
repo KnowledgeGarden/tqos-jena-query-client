@@ -1,5 +1,17 @@
-/**
- * 
+/*
+ * Copyright 2020 TopicQuests
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions
+ * and limitations under the License.
  */
 package org.topicquests.os.search.jena;
 
@@ -25,14 +37,12 @@ import net.minidev.json.JSONObject;
 
 /**
  * @author jackpark
- * @see https://jena.apache.org/documentation/query/manipulating_sparql_using_arq.html
- * @see https://github.com/apache/jena/blob/master/jena-arq/src-examples/arq/examples/ExampleDBpedia1.java
- * @see https://github.com/apache/jena/blob/67ce9537413c2aaa78f76ffe4810eb749a83c3da/jena-arq/src/test/java/org/apache/jena/sparql/resultset/TestResultSet.java
  * 
  */
 public class QueryEngine {
 	private SearchEnvironment environment;
 	private QueryBuilder qb;
+	private HttpClient http;
 
 	/**
 	 * @parm env
@@ -40,6 +50,7 @@ public class QueryEngine {
 	public QueryEngine(SearchEnvironment env) {
 		environment = env;
 		qb = environment.getDSL();
+		http = new HttpClient(environment);
 	}
 	
 	/**
@@ -92,8 +103,7 @@ public class QueryEngine {
 	 * @return
 	 */
 	public IResult searchDBpediaByLabel(String label) {
-		IResult result = new ResultPojo();
-		
+		IResult result = http.doGet(label);
 		return result;
 	}
 
