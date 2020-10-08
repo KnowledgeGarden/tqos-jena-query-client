@@ -11,17 +11,17 @@ import org.topicquests.support.RootEnvironment;
  */
 public class SearchEnvironment extends RootEnvironment {
 	private QueryEngine engine;
-	private QueryDSL	dsl;
+	private QueryBuilder	dsl;
 	/**
 	 */
 	public SearchEnvironment() {
 		super("jena-props.xml", "logger.properties");
 		engine = new QueryEngine(this);
-		dsl = new QueryDSL(this);
+		dsl = new QueryBuilder(this);
 		
 	}
 	
-	public QueryDSL getDSL() {
+	public QueryBuilder getDSL() {
 		return dsl;
 	}
 	public QueryEngine getEngine() {
