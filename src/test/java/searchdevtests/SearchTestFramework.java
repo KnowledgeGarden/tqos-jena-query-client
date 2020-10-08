@@ -22,7 +22,8 @@ public class SearchTestFramework {
 	public static void main(String[] args) {
 		//new FirstDBpediaTest();
 		//new FirstWikidataTest();
-		new BigTest();
+		//new BigTest();
+		new SecondWikidataTest();
 	}
 
 }

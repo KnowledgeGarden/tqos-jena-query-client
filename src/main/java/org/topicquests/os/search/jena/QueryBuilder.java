@@ -30,4 +30,9 @@ public class QueryBuilder {
 		return result;
 	}
 
+	
+	public String finalQuery(String uri) {
+		String result = "select ?p ?o where {<"+uri+"> ?p ?o}";
+		return result;
+	}
 }

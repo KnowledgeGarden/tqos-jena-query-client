@@ -16,9 +16,8 @@ public class SearchEnvironment extends RootEnvironment {
 	 */
 	public SearchEnvironment() {
 		super("jena-props.xml", "logger.properties");
-		engine = new QueryEngine(this);
 		dsl = new QueryBuilder(this);
-		
+		engine = new QueryEngine(this);		
 	}
 	
 	public QueryBuilder getDSL() {
