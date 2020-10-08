@@ -53,6 +53,28 @@ public class QueryEngine {
 		http = new HttpClient(environment);
 	}
 	
+	
+	/**
+	 * <p>A <em>federated query</em> is one which queries both Wikidata
+	 * and DBpedia. Wikidata returns a List of triples in JSON, whereas
+	 * DBpedia returns an array of XML results. We must normalize both of those
+	 * results into a single JSON result which federates both.</p>
+	 * @param label
+	 * @return
+	 */
+	public IResult federatedQueryBylabel(String label) {
+		IResult result = new ResultPojo();
+		IResult wikidata = this.searchWikidataByLabel(label);
+		IResult dbpedia = this.searchDBpediaByLabel(label);
+		//temporary
+		result.setResultObject(wikidata.getResultObject());
+		result.setResultObjectA(dbpedia.getResultObject());
+		result.addErrorString(wikidata.getErrorString()); 
+		result.addErrorString(dbpedia.getErrorString()); 
+		// TODO
+		return result;
+	}
+	
 	/**
 	 * Core Wikidata query by {@code label} 
 	 * Note: assumes English label

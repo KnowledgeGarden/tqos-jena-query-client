@@ -36,7 +36,8 @@ public class SearchTestFramework {
 		//new FirstWikidataTest();
 		//new BigTest();
 		//new SecondWikidataTest();
-		new SecondDBpediaTest();
+		//new SecondDBpediaTest();
+		new FederatedTest();
 	}
 
 }
