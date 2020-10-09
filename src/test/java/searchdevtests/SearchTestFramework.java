@@ -21,12 +21,6 @@ package searchdevtests;
  */
 public class SearchTestFramework {
 
-	/**
-	 * 
-	 */
-	public SearchTestFramework() {
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * @param args
@@ -38,6 +32,9 @@ public class SearchTestFramework {
 		//new SecondWikidataTest();
 		//new SecondDBpediaTest();
 		new FederatedTest();
+		//new ThirdDBpedia();
+		//new SimpleTest();
+		//new SecondSimpleTest();
 	}
 
 }

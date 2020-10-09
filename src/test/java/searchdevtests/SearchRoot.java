@@ -15,6 +15,7 @@
  */
 package searchdevtests;
 
+import org.topicquests.os.search.jena.HttpClient;
 import org.topicquests.os.search.jena.QueryBuilder;
 import org.topicquests.os.search.jena.QueryEngine;
 import org.topicquests.os.search.jena.SearchEnvironment;
@@ -27,6 +28,7 @@ public class SearchRoot {
 	protected SearchEnvironment environment;
 	protected QueryEngine engine;
 	protected QueryBuilder	dsl;
+	protected HttpClient http;
 
 	/**
 	 * 
@@ -35,6 +37,7 @@ public class SearchRoot {
 		environment = new SearchEnvironment();
 		engine = environment.getEngine();
 		dsl  = environment.getDSL();
+		http = engine.getClient();
 	}
 
 }

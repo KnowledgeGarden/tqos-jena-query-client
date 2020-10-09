@@ -53,6 +53,9 @@ public class QueryEngine {
 		http = new HttpClient(environment);
 	}
 	
+	public HttpClient getClient() {
+		return http;
+	}
 	
 	/**
 	 * <p>A <em>federated query</em> is one which queries both Wikidata
@@ -90,25 +93,21 @@ public class QueryEngine {
 		JSONObject q = null;
 		try {
 			if (json != null) {
-					q  = JSONUtil.toJSON(json);
-				JSONObject x = (JSONObject)q.get("results");
-				if (x != null) {
-					List<JSONObject> l = (List<JSONObject>)x.get("bindings");
-					if (l != null && !l.isEmpty()) {
-						JSONObject u = l.get(0);
-						JSONObject s = (JSONObject)u.get("s");
-						String uri = s.getAsString("value");
-						String q2 = qb.finalQuery(uri);
-						r = runQuery(q2, IConstants.WIKIDATA_SERVICE);
-						json = (String)r.getResultObject();
-						if (json!= null) {
-							q = JSONUtil.toJSON(json);
-							q = (JSONObject)q.get("results");
-							l = (List<JSONObject>)q.get("bindings");
-							result.setResultObject(l);
-						}
+				q  = JSONUtil.toJSON(json);
+				List<JSONObject> l = getBindings(q);
+				if (l != null && !l.isEmpty()) {
+					JSONObject u = l.get(0);
+					JSONObject s = (JSONObject)u.get("s");
+					String uri = s.getAsString("value");
+					String q2 = qb.finalQuery(uri);
+					r = runQuery(q2, IConstants.WIKIDATA_SERVICE);
+					json = (String)r.getResultObject();
+					if (json!= null) {
+						q = JSONUtil.toJSON(json);
+						q = (JSONObject)q.get("results");
+						l = (List<JSONObject>)q.get("bindings");
+						result.setResultObject(l);
 					}
-					
 				}
 			}
 		} catch (Exception e) {
@@ -117,18 +116,55 @@ public class QueryEngine {
 		}
 		return result;
 	}
+	
+	List<JSONObject> getBindings(JSONObject q) {
+		List<JSONObject>result = null;
+		JSONObject x = (JSONObject)q.get("results");
+		if (x != null)
+			result = (List<JSONObject>)x.get("bindings");
+		return result;
+	}
 
 	/**
 	 * Core DBpedia query by {@code label}
 	 * Note: assumes English label
-	 * @param label
-	 * @return
+	 * @param label First letter in label must be upper-case
+	 * @return can return {@code null} data
 	 */
 	public IResult searchDBpediaByLabel(String label) {
 		IResult result = http.doGet(label);
+		String urx = IConstants.DBPEDIA_RESOURCE+label;
+		urx = urx.replaceAll(" ", "_");
+		environment.logDebug("QueryEngine.searchDBpediaBylabel-4 "+label+" "+urx);
+		String q = qb.finalQuery(repairURI(urx, label));
+		IResult r = this.runQuery(q, IConstants.DBPEDIA_SERVICE);
+		result.addErrorString(r.getErrorString());
+		String json = (String)r.getResultObject();
+		try {
+			if (json!= null) {
+				JSONObject jx = JSONUtil.toJSON(json);
+				jx = (JSONObject)jx.get("results");
+				result.setResultObject(jx.get("bindings"));
+			}
+		} catch (Exception e) {
+			environment.logError(e.getMessage(), e);
+			result.addErrorString(e.getMessage());
+		}
 		return result;
 	}
 
+	String repairURI(String uri, String properLabel) {
+		String result = uri;
+		String lcl = properLabel.toLowerCase();
+		lcl = lcl.replaceAll(" ","_");
+		String flbl = properLabel.replaceAll(" ", "_");
+		int where = result.indexOf(lcl);
+		if (where > -1) {
+			result = result.substring(0, where)+flbl;
+		}
+		
+		return result;
+	}
 	
 	/**
 	 * Run a given {@code sparql} query against the given {@code serviceURL}
@@ -137,6 +173,7 @@ public class QueryEngine {
 	 * @return
 	 */
 	public IResult runQuery(String sparql, String serviceURL) {
+		environment.logDebug("QueryEngine.runQuery- "+serviceURL+"\n"+sparql);
 		IResult result = new ResultPojo();
 		Query query = QueryFactory.create(sparql);
 	       // Remote execution.
@@ -148,7 +185,10 @@ public class QueryEngine {
             ResultSet rs = qexec.execSelect();
             //ResultSetFormatter.out(System.out, rs, query);
             String json = resultSetToJSON(rs);
+            //environment.logDebug("QueryEngine.runQuery "+sparql+"\n"+json);;
             result.setResultObject(json);
+            //String xml = resultSetToXML(rs);
+            //result.setResultObject(xml);
         } catch (Exception e) {
             e.printStackTrace();
             environment.logError(e.getMessage(), e);
@@ -161,9 +201,17 @@ public class QueryEngine {
 		String result = null;
         ByteArrayOutputStream arr = new ByteArrayOutputStream() ;
         ResultSetFormatter.outputAsJSON(arr, rs) ;
-        //ByteArrayInputStream ins = new ByteArrayInputStream(arr.toByteArray()) ;		
 		result = new String(arr.toByteArray());
 		return result;
+	}
+	
+	String resultSetToXML(ResultSet rs) {
+		String result = null;
+        ByteArrayOutputStream arr = new ByteArrayOutputStream() ;
+        ResultSetFormatter.outputAsXML(arr, rs) ;
+		result = new String(arr.toByteArray());
+		return result;
+		
 	}
 
 }

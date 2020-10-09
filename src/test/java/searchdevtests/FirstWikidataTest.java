@@ -91,5 +91,46 @@ B { "head": {
     ]
   }
 }
+XML only
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="lexemeId"/>
+    <variable name="lemma"/>
+  </head>
+  <results>
+    <result>
+      <binding name="lexemeId">
+        <uri>http://www.wikidata.org/entity/L18187</uri>
+      </binding>
+      <binding name="lemma">
+        <literal xml:lang="en">potassium</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="lexemeId">
+        <uri>http://www.wikidata.org/entity/L41230</uri>
+      </binding>
+      <binding name="lemma">
+        <literal xml:lang="en">potash</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="lexemeId">
+        <uri>http://www.wikidata.org/entity/L41229</uri>
+      </binding>
+      <binding name="lemma">
+        <literal xml:lang="en">potable</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="lexemeId">
+        <uri>http://www.wikidata.org/entity/L3784</uri>
+      </binding>
+      <binding name="lemma">
+        <literal xml:lang="en">potato</literal>
+      </binding>
+    </result>
+  </results>
+</sparql>
 
  */

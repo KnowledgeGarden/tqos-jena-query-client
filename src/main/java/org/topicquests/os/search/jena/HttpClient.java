@@ -86,4 +86,46 @@ public class HttpClient {
 		return result;
 	}
 
+	public IResult simpleGet(String url) {
+		IResult result = new ResultPojo();
+		BufferedReader rd = null;
+		HttpURLConnection con = null;
+
+		try {
+			URL urx = new URL(url);
+			con = (HttpURLConnection) urx.openConnection();
+			con.setReadTimeout(500000);
+			con.setRequestMethod("GET");
+			con.setDoInput(true);
+			con.setDoOutput(true);
+			con.connect();
+			rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			StringBuilder buf = new StringBuilder();
+
+			String line;
+			while ((line = rd.readLine()) != null) {
+				buf.append(line + '\n');
+			}
+
+			result.setResultObject(buf.toString());
+		} catch (Exception var18) {
+			var18.printStackTrace();
+			result.addErrorString(var18.getMessage());
+		} finally {
+			try {
+				if (rd != null) {
+					rd.close();
+				}
+
+				if (con != null) {
+					con.disconnect();
+				}
+			} catch (Exception var17) {
+				var17.printStackTrace();
+				result.addErrorString(var17.getMessage());
+			}
+
+		}		
+		return result;		
+	}
 }
