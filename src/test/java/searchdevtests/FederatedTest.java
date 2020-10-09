@@ -28,10 +28,10 @@ public class FederatedTest extends SearchRoot {
 	//private final String Q = "Cardiomyopathy";
 	//private final String Q  = "Multiple sclerosis";
 	//private final String Q = "Chronic kidney disease";
-	//private final String Q = "Myocardial infarction";
+	private final String Q = "Myocardial infarction";
 	//private final String Q = "Myocardial Infarction";
 	//private final String Q = "Myocardial infarct";
-	private final String Q = "MYOCARDIAL INFARCTION";
+	//private final String Q = "MYOCARDIAL INFARCTION";
 	/**
 	 * 
 	 */

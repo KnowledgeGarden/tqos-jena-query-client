@@ -24,12 +24,23 @@ import org.topicquests.support.RootEnvironment;
 public class SearchEnvironment extends RootEnvironment {
 	private QueryEngine engine;
 	private QueryBuilder	dsl;
+	private HttpClient http;
+	private MergeEngine merger;
+
+
 	/**
 	 */
 	public SearchEnvironment() {
 		super("jena-props.xml", "logger.properties");
+		http = new HttpClient(this);
 		dsl = new QueryBuilder(this);
-		engine = new QueryEngine(this);		
+		engine = new QueryEngine(this);
+		merger = new MergeEngine(this);
+		engine.setMerger(merger);
+	}
+	
+	public HttpClient getHttpClient() {
+		return http;
 	}
 	
 	public QueryBuilder getDSL() {

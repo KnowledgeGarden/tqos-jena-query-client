@@ -21,7 +21,7 @@ package org.topicquests.os.search.jena.api;
  */
 public interface IConstants {
 	public static final String
-		DBPEDIA_SERVICE		= "http://dbpedia.org/sparql",
+		DBPEDIA_SERVICE		= "http://live.dbpedia.org/sparql",
 		DBPEDIA_RESOURCE	= "http://dbpedia.org/resource/",
 		WIKIDATA_SERVICE	= "https://query.wikidata.org/sparql",
 		DBPEDIA_LOOKUP		= "https://lookup.dbpedia.org/api/search.asmx/KeywordSearch?QueryString=";

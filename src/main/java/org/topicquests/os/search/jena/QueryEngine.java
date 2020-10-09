@@ -43,6 +43,7 @@ public class QueryEngine {
 	private SearchEnvironment environment;
 	private QueryBuilder qb;
 	private HttpClient http;
+	private MergeEngine merger;
 
 	/**
 	 * @parm env
@@ -50,9 +51,12 @@ public class QueryEngine {
 	public QueryEngine(SearchEnvironment env) {
 		environment = env;
 		qb = environment.getDSL();
-		http = new HttpClient(environment);
+		http = environment.getHttpClient();
 	}
 	
+	public void setMerger(MergeEngine m) {
+		merger = m;
+	}
 	public HttpClient getClient() {
 		return http;
 	}
@@ -117,7 +121,7 @@ public class QueryEngine {
 		return result;
 	}
 	
-	List<JSONObject> getBindings(JSONObject q) {
+	public List<JSONObject> getBindings(JSONObject q) {
 		List<JSONObject>result = null;
 		JSONObject x = (JSONObject)q.get("results");
 		if (x != null)
