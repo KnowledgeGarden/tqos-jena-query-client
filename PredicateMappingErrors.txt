@@ -1,0 +1,17 @@
+# Sequence is Wikidata pred, followed by a found DBpedia pred, followed by an earlier DBpedia pred (the first one found) which is stored;
+# that is, we only store and use the first hit; others could mean serious errors.
+
+http://www.wikidata.org/entity/P569 http://dbpedia.org/ontology/birthYear http://dbpedia.org/ontology/birthDate
+http://www.wikidata.org/entity/P131 http://dbpedia.org/ontology/city http://dbpedia.org/ontology/settlement
+http://www.wikidata.org/entity/P509 http://dbpedia.org/ontology/deathCause http://dbpedia.org/ontology/causeOfDeath
+http://www.wikidata.org/entity/P131 http://dbpedia.org/ontology/district http://dbpedia.org/ontology/settlement
+http://www.wikidata.org/entity/P69 http://dbpedia.org/ontology/education http://dbpedia.org/ontology/almaMater
+http://www.wikidata.org/entity/P571 http://dbpedia.org/ontology/foundingDate http://dbpedia.org/ontology/formationDate
+http://www.wikidata.org/entity/P131 http://dbpedia.org/ontology/province http://dbpedia.org/ontology/settlement
+http://www.wikidata.org/entity/P176 http://dbpedia.org/ontology/builder http://dbpedia.org/ontology/manufacturer
+http://www.wikidata.org/entity/P112 http://dbpedia.org/ontology/founder http://dbpedia.org/ontology/foundedBy
+http://www.wikidata.org/entity/P6 http://dbpedia.org/ontology/taoiseach http://dbpedia.org/ontology/primeMinister
+http://www.wikidata.org/entity/P131 http://dbpedia.org/ontology/locatedInArea http://dbpedia.org/ontology/settlement
+http://www.wikidata.org/entity/P86 http://dbpedia.org/ontology/musicBy http://dbpedia.org/ontology/composer
+http://www.wikidata.org/entity/P175 http://dbpedia.org/ontology/musicalArtist http://dbpedia.org/ontology/artist
+http://www.wikidata.org/entity/P131 http://dbpedia.org/ontology/county http://dbpedia.org/ontology/settlement

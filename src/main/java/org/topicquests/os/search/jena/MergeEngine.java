@@ -55,9 +55,12 @@ public class MergeEngine {
 	
 	JSONObject mergeBoth(List<JSONObject> dbp, List<JSONObject> wd) {
 		JSONObject result = null;
+		// make dictionaries and clean them
 		JSONObject dbpDict = this.toDictionary(dbp);
+		dbpDict = cleanDBP(dbpDict);
 		JSONObject wdDict = this.toDictionary(wd);
-		
+		wdDict = this.cleanWD(wdDict);
+
 		
 		JSONObject longest = dbpDict;
 		JSONObject other = wdDict;
@@ -65,6 +68,43 @@ public class MergeEngine {
 			longest = wdDict;
 			other = dbpDict;
 		}
+		
+		
+		return result;
+	}
+	
+	/**
+	 * Strip useless predicates
+	 * @param dbpDict
+	 * @return
+	 */
+	JSONObject cleanDBP(JSONObject dbpDict) {
+		JSONObject result = dbpDict;
+		environment.logDebug("CDBP-1\n"+result);
+		String [] badPreds = UselessPreds.DBPUselessPreds;
+		int len = badPreds.length;
+		for (String bp: badPreds) {
+			result.remove(bp);
+		}
+		environment.logDebug("CDBP-2\n"+result);	
+		return result;
+	}
+	
+	JSONObject cleanWD(JSONObject wdDict) {
+		JSONObject result = wdDict;
+		environment.logDebug("CWD-1\n"+result);
+		String [] badPreds = UselessPreds.WDUselessPreds;
+		int len = badPreds.length;
+		for (String bp: badPreds) {
+			result.remove(bp);
+		}
+		environment.logDebug("CWD-2\n"+result);	
+		return result;
+	}
+	
+	JSONObject mapPreds(JSONObject wdDict) {
+		JSONObject result = wdDict;
+		//Iterator<String>itr = 
 		
 		
 		return result;
@@ -91,7 +131,7 @@ public class MergeEngine {
 			if (!result.containsKey(key))
 				result.put(key, obj);
 			else {
-				environment.logDebug("MergeEngine.foundCollection "+key+" "+obj);
+				//environment.logDebug("MergeEngine.foundCollection "+key+" "+obj);
 				//forced to make a collection
 				Object ox = result.get(key);
 				if (ox instanceof JSONObject) {

@@ -74,11 +74,15 @@ public class QueryEngine {
 		IResult wikidata = this.searchWikidataByLabel(label);
 		IResult dbpedia = this.searchDBpediaByLabel(label);
 		//temporary
-		result.setResultObject(wikidata.getResultObject());
-		result.setResultObjectA(dbpedia.getResultObject());
+		//result.setResultObject(wikidata.getResultObject());
+		//result.setResultObjectA(dbpedia.getResultObject());
+		List<JSONObject> wdX = (List<JSONObject>)wikidata.getResultObject();
+		List<JSONObject> dbpX = (List<JSONObject>)dbpedia.getResultObject();
+
 		result.addErrorString(wikidata.getErrorString()); 
 		result.addErrorString(dbpedia.getErrorString()); 
-		// TODO
+		// merge
+		JSONObject mgX = merger.mergeBoth(dbpX, wdX);
 		return result;
 	}
 	

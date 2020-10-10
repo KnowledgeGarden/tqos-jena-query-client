@@ -50,21 +50,12 @@ public class DBP_WD_Util {
 					sV = subj.getAsString("value");
 					obj  = (JSONObject)jo.get("o");
 					oV = obj.getAsString("value");
-					rx = result.get(sV);
-					if (rx == null)
-						result.put(sV, oV);
-					else {
-						if (!rx.equals(oV)) {
-							if (rx instanceof String) {
-								lx = new ArrayList<String>();
-								lx.add(oV);
-							} else {
-								lx = (List<String>)rx;
-								if (!lx.contains(oV))
-									lx.add(oV);
-							}
-							result.put(sV, lx);
-						}
+					if (oV.contains("wikidata")) {
+						rx = result.get(oV);
+						if (rx == null)
+							result.put(oV, sV);
+						else 
+							environment.logDebug("MergeDup "+oV+" "+sV+" "+rx);
 					}
 					
 				}

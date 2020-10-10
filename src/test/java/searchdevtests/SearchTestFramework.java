@@ -31,10 +31,11 @@ public class SearchTestFramework {
 		//new BigTest();
 		//new SecondWikidataTest();
 		//new SecondDBpediaTest();
-		new FederatedTest();
+		//new FederatedTest();
 		//new ThirdDBpedia();
 		//new SimpleTest();
 		//new SecondSimpleTest();
+		new BootTest();
 	}
 
 }
