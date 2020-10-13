@@ -35,7 +35,8 @@ public class SearchTestFramework {
 		//new ThirdDBpedia();
 		//new SimpleTest();
 		//new SecondSimpleTest();
-		new BootTest();
+		//new BootTest();
+		new LinkedLifeTest();
 	}
 
 }

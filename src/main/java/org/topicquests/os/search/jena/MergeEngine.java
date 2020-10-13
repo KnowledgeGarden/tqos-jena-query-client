@@ -60,6 +60,9 @@ public class MergeEngine {
 		dbpDict = cleanDBP(dbpDict);
 		JSONObject wdDict = this.toDictionary(wd);
 		wdDict = this.cleanWD(wdDict);
+		// swap out wikidata predicates for dbpedia predicates
+		wdDict = this.mapPreds(wdDict);
+		environment.logDebug("MergeBoth-1\n"+wdDict);
 
 		
 		JSONObject longest = dbpDict;
@@ -102,11 +105,26 @@ public class MergeEngine {
 		return result;
 	}
 	
+	/**
+	 * For each Wikidata predicate type, substitute its equivalent
+	 * DBpedia predicate type
+	 * @param wdDict
+	 * @return
+	 */
 	JSONObject mapPreds(JSONObject wdDict) {
 		JSONObject result = wdDict;
-		//Iterator<String>itr = 
-		
-		
+		Iterator<String>itr = this.propertyMappings.keySet().iterator();
+		String wdKey, dbpKey;
+		Object dbpObj;
+		while (itr.hasNext()) {
+			wdKey = itr.next();
+			dbpKey = this.propertyMappings.getAsString(wdKey);
+			dbpObj = wdDict.remove(wdKey);
+			if (dbpObj != null) {
+				environment.logDebug("MapPreds "+wdKey+" "+dbpKey);
+				wdDict.put(dbpKey, dbpObj);
+			}
+		}
 		return result;
 	}
 	

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<!-- 
-		JavalinBacksideCore properties
-	-->
+	<!--  -->
 	
 <properties>
 
-	<parameter name="ServerPort" value="7070" />
+	<parameter name="FusekiHost" value = "192.168.8.12" /> <!-- CHANGE ME -->
+	<parameter name="FusekiPort" value="3030" />
 
+	<!-- sparql endpoint -->
+	<parameter name="LinkedLifeURL" value="http://linkedlifedata.com/sparql" />
 	
 </properties>	
 

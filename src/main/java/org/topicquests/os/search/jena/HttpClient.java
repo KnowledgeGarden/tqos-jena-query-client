@@ -40,15 +40,15 @@ public class HttpClient {
 		environment = env;
 	}
 	
-	public IResult doGet(String query) {
+	public IResult doGet(String url, String query) {
 		IResult result = new ResultPojo();
 		BufferedReader rd = null;
 		HttpURLConnection con = null;
 
 		try {
 			String x =  URLEncoder.encode(query, "UTF-8");
-			String q = IConstants.DBPEDIA_LOOKUP+x;
-			
+			String q = url+x;
+			System.out.println("HttpClient.doGet "+q);
 			URL urx = new URL(q);
 			con = (HttpURLConnection) urx.openConnection();
 			con.setReadTimeout(500000);
@@ -90,7 +90,7 @@ public class HttpClient {
 		IResult result = new ResultPojo();
 		BufferedReader rd = null;
 		HttpURLConnection con = null;
-
+		System.out.println("Http.simpleGet "+url);
 		try {
 			URL urx = new URL(url);
 			con = (HttpURLConnection) urx.openConnection();
@@ -99,6 +99,7 @@ public class HttpClient {
 			con.setDoInput(true);
 			con.setDoOutput(true);
 			con.connect();
+			System.out.println("Http-2 "+con.getResponseCode());
 			rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			StringBuilder buf = new StringBuilder();
 
@@ -129,3 +130,4 @@ public class HttpClient {
 		return result;		
 	}
 }
+

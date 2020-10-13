@@ -52,4 +52,12 @@ public class QueryBuilder {
 		String result = "select ?p ?o where {<"+uri+"> ?p ?o}";
 		return result;
 	}
+	
+	public String tripleQuery(String label, int limit) {
+		String result = //"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
+				"SELECT * WHERE {\n"
+				+" ?s ?p ?o .\n"
+				+" ?s rdfs:label '"+label+"'} LIMIT "+limit;
+		return result;
+	}
 }

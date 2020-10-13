@@ -140,7 +140,7 @@ public class QueryEngine {
 	 * @return can return {@code null} data
 	 */
 	public IResult searchDBpediaByLabel(String label) {
-		IResult result = http.doGet(label);
+		IResult result = http.doGet(IConstants.DBPEDIA_RESOURCE, label);
 		String urx = IConstants.DBPEDIA_RESOURCE+label;
 		urx = urx.replaceAll(" ", "_");
 		environment.logDebug("QueryEngine.searchDBpediaBylabel-4 "+label+" "+urx);

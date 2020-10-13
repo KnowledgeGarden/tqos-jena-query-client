@@ -11,7 +11,9 @@ import org.topicquests.support.api.IResult;
  * it returns an HTML document.
  */
 public class SimpleTest extends SearchRoot {
-	private final String URL = "http://dbpedia.org/resource/Chronic_myelogenous_leukemia";
+	private final String URL = 
+		"http://linkedlifedata.com/sparql.json?query=SELECT+*%0D%0AWHERE+%7B%0D%0A++++%3Fs+%3Fp+%3Fo+.%0D%0A++%09%3Fs+rdfs%3Alabel+%27leukemia%27+.%0D%0A%7D+LIMIT+1000&_implicit=false&implicit=true&_form=%2Fsparql";	
+			//"http://dbpedia.org/resource/Chronic_myelogenous_leukemia";
 	
 	/**
 	 * 
