@@ -42,7 +42,7 @@ public class BioportalClient {
 			environment.logError(e.getMessage(), e);
 			result.addErrorString(e.getMessage());
 		}
-		String query = BASE_URL+"?q="+qx;
+		String query = BASE_URL+"search?q="+qx;
 		IResult r = http.bioportalGet(query, API_KEY);
 		String json = (String)r.getResultObject();
 		if (json != null) {
