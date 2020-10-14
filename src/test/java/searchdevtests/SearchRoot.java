@@ -15,6 +15,7 @@
  */
 package searchdevtests;
 
+import org.topicquests.os.search.jena.BioportalClient;
 import org.topicquests.os.search.jena.HttpClient;
 import org.topicquests.os.search.jena.QueryBuilder;
 import org.topicquests.os.search.jena.QueryEngine;
@@ -29,6 +30,7 @@ public class SearchRoot {
 	protected QueryEngine engine;
 	protected QueryBuilder	dsl;
 	protected HttpClient http;
+	protected BioportalClient bioPortal;
 
 	/**
 	 * 
@@ -38,6 +40,7 @@ public class SearchRoot {
 		engine = environment.getEngine();
 		dsl  = environment.getDSL();
 		http = engine.getClient();
+		bioPortal = environment.getBioportalClient();
 	}
 
 }

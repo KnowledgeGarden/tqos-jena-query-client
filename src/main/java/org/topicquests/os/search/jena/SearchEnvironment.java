@@ -26,6 +26,7 @@ public class SearchEnvironment extends RootEnvironment {
 	private QueryBuilder	dsl;
 	private HttpClient http;
 	private MergeEngine merger;
+	private BioportalClient bioPortal;
 
 
 	/**
@@ -37,6 +38,11 @@ public class SearchEnvironment extends RootEnvironment {
 		engine = new QueryEngine(this);
 		merger = new MergeEngine(this);
 		engine.setMerger(merger);
+		bioPortal = new BioportalClient(this);
+	}
+	
+	public BioportalClient getBioportalClient() {
+		return bioPortal;
 	}
 	
 	public HttpClient getHttpClient() {

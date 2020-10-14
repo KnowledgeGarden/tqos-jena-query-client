@@ -129,5 +129,49 @@ public class HttpClient {
 		}		
 		return result;		
 	}
+	
+	public IResult bioportalGet(String url, String key) {
+		IResult result = new ResultPojo();
+		BufferedReader rd = null;
+		HttpURLConnection con = null;
+		System.out.println("Http.simpleGet "+url);
+		try {
+			URL urx = new URL(url);
+			con = (HttpURLConnection) urx.openConnection();
+			con.setReadTimeout(500000);
+			con.setRequestMethod("GET");
+			con.setRequestProperty("Authorization", "apikey token=" + key);
+            con.setRequestProperty("Accept", "application/json");
+
+			System.out.println("Http-3 "+con.getResponseCode());
+			rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			StringBuilder buf = new StringBuilder();
+
+			String line;
+			while ((line = rd.readLine()) != null) {
+				buf.append(line + '\n');
+			}
+
+			result.setResultObject(buf.toString());
+		} catch (Exception var18) {
+			var18.printStackTrace();
+			result.addErrorString(var18.getMessage());
+		} finally {
+			try {
+				if (rd != null) {
+					rd.close();
+				}
+
+				if (con != null) {
+					con.disconnect();
+				}
+			} catch (Exception var17) {
+				var17.printStackTrace();
+				result.addErrorString(var17.getMessage());
+			}
+
+		}		
+		return result;
+	}
 }
 

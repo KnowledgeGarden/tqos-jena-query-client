@@ -9,6 +9,8 @@
 	<!-- sparql endpoint -->
 	<parameter name="LinkedLifeURL" value="http://linkedlifedata.com/sparql" />
 	
+	<parameter name="BioportalURL" value="http://data.bioportal.org/" />
+	<parameter name="BioportalAPI_KEY" value="change_me" />
 </properties>	
 
 	

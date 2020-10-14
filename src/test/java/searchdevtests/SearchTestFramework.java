@@ -36,7 +36,8 @@ public class SearchTestFramework {
 		//new SimpleTest();
 		//new SecondSimpleTest();
 		//new BootTest();
-		new LinkedLifeTest();
+		//new LinkedLifeTest();
+		new BioportalTest_1();
 	}
 
 }
