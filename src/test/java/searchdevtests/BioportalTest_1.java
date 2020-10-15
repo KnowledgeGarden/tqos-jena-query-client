@@ -15,6 +15,7 @@ import org.topicquests.support.api.IResult;
 public class BioportalTest_1 extends SearchRoot {
 	private final String
 		LABEL = "myocardial infarction";
+	private final int ALL_PAGES = -1;
 		
 	/**
 	 * 
@@ -27,7 +28,7 @@ public class BioportalTest_1 extends SearchRoot {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		IResult r = bioPortal.labelQuery(qx);
+		IResult r = bioPortal.labelQuery(qx, ALL_PAGES );
 		System.out.println("A "+r.getErrorString());
 		environment.logDebug("B\n"+r.getResultObject());
 		environment.shutDown();
