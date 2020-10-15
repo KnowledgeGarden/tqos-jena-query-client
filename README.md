@@ -1,5 +1,5 @@
 # tqos-jena-query-client
-Apache Jena query client for DBpedia and Wikidata
+Apache Jena query client for DBpedia, Wikidata, and Bioportal
 
 Build with `mvn clean install -DskipTests`
 
